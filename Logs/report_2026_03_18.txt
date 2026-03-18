@@ -1,0 +1,24 @@
+
+================================================================================
+REPORT MONITORAGGIO SITI - 18/03/26 09:22:18
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 401ms      | 216.5 KB   | Apache          | NO              | 42         | SAMEORIGIN
+GrifoCom             | 200                  | 2050ms     | 154.4 KB   | Apache          | NO              | 336        | MANCANTE  
+GrifoEu              | 200                  | 130ms      | 141.6 KB   | Apache          | NO              | 343        | MANCANTE  
+SmGroup              | 200                  | 196ms      | 62.2 KB    | Apache          | NO              | 305        | SAMEORIGIN
+InteractiveIt        | 200                  | 958ms      | 205.3 KB   | Apache          | NO              | 53         | MANCANTE  
+InteractiveEu        | 200                  | 902ms      | 197.8 KB   | Apache          | NO              | 89         | MANCANTE  
+Agripasta            | 200                  | 840ms      | 141.6 KB   | Apache          | NO              | 270        | MANCANTE  
+ArtigianaStampi      | 200                  | 1804ms     | 398.7 KB   | Apache          | NO              | 37         | MANCANTE  
+Bergoli              | 200                  | 547ms      | 156.1 KB   | Apache          | NO              | 211        | MANCANTE  
+Cacib                | 200                  | 784ms      | 369.8 KB   | cloudflare      | NO              | 68         | MANCANTE  
+Cubo                 | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+Dastel               | 200                  | 528ms      | 121.5 KB   | Apache          | SI              | 248        | MANCANTE  
+FerMarchetti         | 200                  | 533ms      | 79.4 KB    | Apache          | SI              | 84         | MANCANTE  
+MarioFerri           | 200                  | 310ms      | 186.7 KB   | Apache          | NO              | 37         | MANCANTE  
+RiseDog              | 200                  | 802ms      | 110.8 KB   | Apache          | NO              | 48         | MANCANTE  
+VideoPro             | 200                  | 3431ms     | 397.9 KB   | Apache          | NO              | 38         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
