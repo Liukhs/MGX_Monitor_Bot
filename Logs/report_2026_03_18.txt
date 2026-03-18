@@ -22,3 +22,51 @@ MarioFerri           | 200                  | 310ms      | 186.7 KB   | Apache  
 RiseDog              | 200                  | 802ms      | 110.8 KB   | Apache          | NO              | 48         | MANCANTE  
 VideoPro             | 200                  | 3431ms     | 397.9 KB   | Apache          | NO              | 38         | MANCANTE  
 -----------------------------------------------------------------------------------------------------------------------------------
+
+================================================================================
+REPORT MONITORAGGIO SITI - 18/03/26 12:29:16
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 400ms      | 216.5 KB   | Apache          | NO              | 41         | SAMEORIGIN
+GrifoCom             | 200                  | 1655ms     | 154.7 KB   | Apache          | NO              | 336        | MANCANTE  
+GrifoEu              | 200                  | 93ms       | 141.6 KB   | Apache          | NO              | 343        | MANCANTE  
+SmGroup              | 200                  | 170ms      | 62.2 KB    | Apache          | NO              | 305        | SAMEORIGIN
+InteractiveIt        | 200                  | 979ms      | 205.3 KB   | Apache          | NO              | 53         | MANCANTE  
+InteractiveEu        | 200                  | 936ms      | 197.8 KB   | Apache          | NO              | 89         | MANCANTE  
+Agripasta            | 200                  | 453ms      | 141.6 KB   | Apache          | NO              | 270        | MANCANTE  
+ArtigianaStampi      | 200                  | 1787ms     | 398.7 KB   | Apache          | NO              | 37         | MANCANTE  
+Bergoli              | 200                  | 749ms      | 156.1 KB   | Apache          | NO              | 211        | MANCANTE  
+Cacib                | 200                  | 799ms      | 369.8 KB   | cloudflare      | NO              | 68         | MANCANTE  
+Cubo                 | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+Dastel               | 200                  | 488ms      | 121.5 KB   | Apache          | SI              | 248        | MANCANTE  
+FerMarchetti         | 200                  | 455ms      | 79.4 KB    | Apache          | SI              | 84         | MANCANTE  
+MarioFerri           | 200                  | 240ms      | 186.7 KB   | Apache          | NO              | 37         | MANCANTE  
+RiseDog              | 200                  | 1010ms     | 110.7 KB   | Apache          | NO              | 48         | MANCANTE  
+VideoPro             | 200                  | 3322ms     | 397.9 KB   | Apache          | NO              | 38         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
+
+================================================================================
+REPORT MONITORAGGIO SITI - 18/03/26 14:14:24
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 395ms      | 216.5 KB   | Apache          | NO              | 41         | SAMEORIGIN
+GrifoCom             | 200                  | 1586ms     | 154.6 KB   | Apache          | NO              | 336        | MANCANTE  
+GrifoEu              | 200                  | 112ms      | 141.6 KB   | Apache          | NO              | 343        | MANCANTE  
+SmGroup              | 200                  | 145ms      | 62.2 KB    | Apache          | NO              | 305        | SAMEORIGIN
+InteractiveIt        | 200                  | 959ms      | 205.3 KB   | Apache          | NO              | 52         | MANCANTE  
+InteractiveEu        | 200                  | 917ms      | 197.8 KB   | Apache          | NO              | 89         | MANCANTE  
+Agripasta            | 200                  | 435ms      | 141.6 KB   | Apache          | NO              | 270        | MANCANTE  
+ArtigianaStampi      | 200                  | 1787ms     | 398.7 KB   | Apache          | NO              | 37         | MANCANTE  
+Bergoli              | 200                  | 454ms      | 156.1 KB   | Apache          | NO              | 211        | MANCANTE  
+Cacib                | 200                  | 647ms      | 369.8 KB   | cloudflare      | NO              | 68         | MANCANTE  
+Cubo                 | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+Dastel               | 200                  | 502ms      | 121.5 KB   | Apache          | NO              | 248        | MANCANTE  
+FerMarchetti         | 200                  | 470ms      | 79.4 KB    | Apache          | SI              | 84         | MANCANTE  
+MarioFerri           | 200                  | 233ms      | 186.7 KB   | Apache          | NO              | 37         | MANCANTE  
+RiseDog              | 200                  | 801ms      | 110.8 KB   | Apache          | NO              | 48         | MANCANTE  
+VideoPro             | 200                  | 3311ms     | 397.9 KB   | Apache          | NO              | 38         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
