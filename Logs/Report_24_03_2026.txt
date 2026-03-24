@@ -1,0 +1,112 @@
+
+================================================================================
+================================================================================
+REPORT MONITORAGGIO SITI - 24/03/26 14:45:52
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 379ms      | 216.5 KB   | Apache          | NO              | 35         | SAMEORIGIN
+GrifoCom             | 200                  | 1354ms     | 154.7 KB   | Apache          | NO              | 330        | MANCANTE  
+GrifoEu              | 200                  | 70ms       | 141.6 KB   | Apache          | NO              | 337        | MANCANTE  
+SmGroup              | 200                  | 145ms      | 62.2 KB    | Apache          | NO              | 299        | SAMEORIGIN
+InteractiveIt        | 200                  | 853ms      | 205.3 KB   | Apache          | NO              | 46         | MANCANTE  
+InteractiveEu        | 200                  | 818ms      | 197.8 KB   | Apache          | NO              | 83         | MANCANTE  
+Agripasta            | 200                  | 423ms      | 141.6 KB   | Apache          | NO              | 264        | MANCANTE  
+ArtigianaStampi      | 200                  | 631ms      | 398.7 KB   | Apache          | NO              | 31         | MANCANTE  
+Bergoli              | 200                  | 1015ms     | 156.1 KB   | Apache          | NO              | 205        | MANCANTE  
+Cacib                | 200                  | 662ms      | 369.8 KB   | cloudflare      | NO              | 62         | MANCANTE  
+Dastel               | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+FerMarchetti         | 200                  | 510ms      | 79.4 KB    | Apache          | NO              | 78         | MANCANTE  
+MarioFerri           | 200                  | 300ms      | 186.8 KB   | Apache          | NO              | 31         | MANCANTE  
+RiseDog              | 200                  | 774ms      | 110.7 KB   | Apache          | NO              | 42         | MANCANTE  
+VideoPro             | 200                  | 3161ms     | 397.9 KB   | Apache          | NO              | 32         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
+Scansione completata. Report salvato in: logs\Report_24_03_2026.txt
+
+================================================================================
+================================================================================
+REPORT MONITORAGGIO SITI - 24/03/26 14:46:40
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 385ms      | 216.5 KB   | Apache          | NO              | 35         | SAMEORIGIN
+GrifoCom             | 200                  | 1460ms     | 154.3 KB   | Apache          | NO              | 330        | MANCANTE  
+GrifoEu              | 200                  | 82ms       | 141.6 KB   | Apache          | NO              | 337        | MANCANTE  
+SmGroup              | 200                  | 133ms      | 62.2 KB    | Apache          | NO              | 299        | SAMEORIGIN
+InteractiveIt        | 200                  | 847ms      | 205.3 KB   | Apache          | NO              | 46         | MANCANTE  
+InteractiveEu        | 200                  | 820ms      | 197.8 KB   | Apache          | NO              | 83         | MANCANTE  
+Agripasta            | 200                  | 416ms      | 141.6 KB   | Apache          | NO              | 264        | MANCANTE  
+ArtigianaStampi      | 200                  | 504ms      | 398.7 KB   | Apache          | NO              | 31         | MANCANTE  
+Bergoli              | 200                  | 1074ms     | 156.1 KB   | Apache          | NO              | 205        | MANCANTE  
+Cacib                | 200                  | 260ms      | 369.8 KB   | cloudflare      | NO              | 62         | MANCANTE  
+Dastel               | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+FerMarchetti         | 200                  | 539ms      | 79.4 KB    | Apache          | NO              | 78         | MANCANTE  
+MarioFerri           | 200                  | 222ms      | 186.8 KB   | Apache          | NO              | 31         | MANCANTE  
+RiseDog              | 200                  | 771ms      | 110.7 KB   | Apache          | NO              | 42         | MANCANTE  
+VideoPro             | 200                  | 3335ms     | 397.9 KB   | Apache          | NO              | 32         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
+Scansione completata. Report salvato in: logs\Report_24_03_2026.txt
+
+================================================================================
+================================================================================
+
+================================================================================
+================================================================================
+
+================================================================================
+================================================================================
+
+================================================================================
+================================================================================
+
+================================================================================
+================================================================================
+REPORT MONITORAGGIO SITI - 24/03/26 15:25:21
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 355ms      | 216.5 KB   | Apache          | NO              | 35         | SAMEORIGIN
+GrifoCom             | 200                  | 936ms      | 154.4 KB   | Apache          | NO              | 330        | MANCANTE  
+GrifoEu              | 200                  | 91ms       | 141.6 KB   | Apache          | NO              | 337        | MANCANTE  
+SmGroup              | 200                  | 157ms      | 62.2 KB    | Apache          | NO              | 299        | SAMEORIGIN
+InteractiveIt        | 200                  | 813ms      | 205.3 KB   | Apache          | NO              | 46         | MANCANTE  
+InteractiveEu        | 200                  | 911ms      | 197.8 KB   | Apache          | NO              | 83         | MANCANTE  
+Agripasta            | 200                  | 416ms      | 141.6 KB   | Apache          | NO              | 264        | MANCANTE  
+ArtigianaStampi      | 200                  | 788ms      | 398.7 KB   | Apache          | NO              | 31         | MANCANTE  
+Bergoli              | 200                  | 1122ms     | 156.1 KB   | Apache          | NO              | 205        | MANCANTE  
+Cacib                | 200                  | 708ms      | 369.8 KB   | cloudflare      | NO              | 62         | MANCANTE  
+Dastel               | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+FerMarchetti         | 200                  | 583ms      | 79.4 KB    | Apache          | NO              | 78         | MANCANTE  
+MarioFerri           | 200                  | 225ms      | 186.8 KB   | Apache          | NO              | 31         | MANCANTE  
+RiseDog              | 200                  | 887ms      | 110.8 KB   | Apache          | NO              | 42         | MANCANTE  
+VideoPro             | 200                  | 3393ms     | 397.9 KB   | Apache          | NO              | 32         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
+Scansione completata. Report salvato in: logs\Report_24_03_2026.txt
+
+================================================================================
+================================================================================
+REPORT MONITORAGGIO SITI - 24/03/26 15:28:03
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+Mygladix             | 200                  | 376ms      | 216.5 KB   | Apache          | NO              | 35         | SAMEORIGIN
+GrifoCom             | 200                  | 1279ms     | 154.7 KB   | Apache          | NO              | 330        | MANCANTE  
+GrifoEu              | 200                  | 96ms       | 141.6 KB   | Apache          | NO              | 337        | MANCANTE  
+SmGroup              | 200                  | 150ms      | 62.2 KB    | Apache          | NO              | 299        | SAMEORIGIN
+InteractiveIt        | 200                  | 924ms      | 205.3 KB   | Apache          | NO              | 46         | MANCANTE  
+InteractiveEu        | 200                  | 825ms      | 197.8 KB   | Apache          | NO              | 83         | MANCANTE  
+Agripasta            | 200                  | 443ms      | 141.6 KB   | Apache          | NO              | 264        | MANCANTE  
+ArtigianaStampi      | 200                  | 682ms      | 398.7 KB   | Apache          | NO              | 31         | MANCANTE  
+Bergoli              | 200                  | 1213ms     | 156.1 KB   | Apache          | NO              | 205        | MANCANTE  
+Cacib                | 200                  | 409ms      | 369.8 KB   | cloudflare      | NO              | 62         | MANCANTE  
+Dastel               | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+FerMarchetti         | 200                  | 601ms      | 79.4 KB    | Apache          | NO              | 78         | MANCANTE  
+MarioFerri           | 200                  | 220ms      | 186.8 KB   | Apache          | NO              | 31         | MANCANTE  
+RiseDog              | 200                  | 981ms      | 110.8 KB   | Apache          | NO              | 42         | MANCANTE  
+VideoPro             | 200                  | 3911ms     | 397.9 KB   | Apache          | NO              | 32         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
+Scansione completata. Report salvato in: logs\Report_24_03_2026.txt
