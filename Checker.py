@@ -20,6 +20,7 @@ def controlla_scadenza_ssl(hostname):
 def controlla_url(nome, dati, timeout):
     url = dati["url"]
     keyword = dati["keyword"]
+    print(f"DEBUG: sto controllando sito {nome} con url :{url}")
     hostname = url.replace("https://", "").replace("http://", "").split("/")[0]
     try:
         r = requests.get(url, timeout=timeout)

@@ -1,15 +1,17 @@
 import customtkinter as ctk
+from CTkToolTip import *
 import threading
 import time
 import Config
 import Logger
 import notifier
 import Checker
+import Tips
 
 class BotApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-
+        self.report_attuale = []
         self.title("MyxMonitor - v1.0")
         self.geometry("1000x600")
 
@@ -27,6 +29,7 @@ class BotApp(ctk.CTk):
 
         self.btn_avvia = ctk.CTkButton(self.header_frame, text="Esegui Operazione", fg_color="green", hover_color="darkgreen", command=self.avvio_sicuro)
         self.btn_avvia.grid(row=0, column=1, sticky="e")
+        tip_btn_avvia = CTkToolTip(self.btn_avvia, "Avvia la scansione dei siti")
         
 
         # --- RIGA 1
@@ -35,8 +38,10 @@ class BotApp(ctk.CTk):
 
         self.btn_config = ctk.CTkButton(self.tools_frame, text="⚙️ Configurazione", width=150, command=self.apri_config)
         self.btn_config.grid(row=1, column=0, padx=(0, 10))
-        self.btn_export = ctk.CTkButton(self.tools_frame, text="📄 Esporta Report TXT", width=150, command=self.log)
+        tip_btn_config = CTkToolTip(self.btn_config, "Accedi alla configurazione dei siti")
+        self.btn_export = ctk.CTkButton(self.tools_frame, text="📄 Esporta Report TXT", width=150, command=self.verify_export)
         self.btn_export.grid(row=1, column=1, padx=(0, 10))
+        tip_btn_export = CTkToolTip(self.btn_export, "Stampa i risultati in un file .txt")
         # --- RIGA 2
         self.area_log = ctk.CTkScrollableFrame(self,fg_color="#2b2b2b", border_width=2, corner_radius=0)
         self.area_log.grid(row="2", column="0", sticky="nsew", padx=20, pady=(10, 20))
@@ -142,7 +147,7 @@ class BotApp(ctk.CTk):
     def funzione_bot(self):
         self.log(f"Inizio lavoro di monitoraggio")
         
-        report_attuale = []
+        self.report_attuale = []
         errori_rilevati = []
         self.log("avvio del bot, procedendo alla scansione...")
 
@@ -150,20 +155,20 @@ class BotApp(ctk.CTk):
 
         for nome, dati in Config.clienti.items():
             stato = Checker.controlla_url(nome, dati, Config.TIMEOUT)
-            report_attuale.append(stato)
+            self.report_attuale.append(stato)
     
             if stato["stato"] != "200":
                 errori_rilevati.append(f"{nome}: {stato['stato']}")
             elif isinstance(stato["ssl_days"], int) and stato["ssl_days"] < 10:
                 errori_rilevati.append(f"{nome}: SSL in scadenza tra {stato['ssl_days']} giorni!")
 
-        Logger.scrivi_report(report_attuale)
+        
         try:
             self.log("Scansione terminata. Generazione report...")
 
     
 
-            self.renderizza_tabella(report_attuale)
+            self.renderizza_tabella(self.report_attuale)
 
         except Exception as e:
             self.log(f"Errore nella scrittura del report: {e}")
@@ -173,21 +178,23 @@ class BotApp(ctk.CTk):
         if errori_rilevati:
             messaggio = "⚠️ *PROBLEMI RILEVATI!*\n\n" + "\n".join(errori_rilevati)
             notifier.invia_messaggio(messaggio)
-            print("NOTIFICA INVIATA!")
-        else:
-            print("Tutto regolare")
+            
         self.log("Lavoro finito - controllare report_siti.txt")
 
     def renderizza_tabella(self, risultati):
         # Pulisce tutto quello che c'è nel frame (log vecchi o tabelle vecchie)
         for widget in self.area_log.winfo_children():
             widget.destroy()
+
+        buffer_tabella = ctk.CTkFrame(self.area_log, fg_color="transparent")
         
         # Header (Intestazioni)
         for j, h in enumerate(self.headers):
-            header_cell = ctk.CTkLabel(self.area_log, text=h, font=("Segoe UI", 12, "bold"), 
+            header_cell = ctk.CTkLabel(buffer_tabella, text=h, font=("Segoe UI", 12, "bold"), 
                                       fg_color="#1f538d", text_color="white", padx=10, pady=5)
             header_cell.grid(row=0, column=j, sticky="nsew", padx=1, pady=1)
+            tip = self.scegli_tip(h)
+            tip_header_cell = CTkToolTip(header_cell, f"{tip}")
 
         # Dati (Righe)
         for i, r in enumerate(risultati, start=1):
@@ -205,10 +212,23 @@ class BotApp(ctk.CTk):
                 if j == 1 and str(valore) != "200": 
                     testo_colore = "#ff6666"
 
-                cella = ctk.CTkLabel(self.area_log, text=str(valore), fg_color=bg_color, 
+                cella = ctk.CTkLabel(buffer_tabella, text=str(valore), fg_color=bg_color, 
                                     text_color=testo_colore, padx=10, pady=2, font=("Segoe UI", 11))
                 cella.grid(row=i, column=j, sticky="nsew", padx=1, pady=1)
+        buffer_tabella.pack(expand=True, fill="both")
+        self.update_idletasks()
 
+    def verify_export(self):
+        if not self.report_attuale:
+            self.log("Non esistono report da esportare al momento")
+            return
+        Logger.scrivi_report(self.report_attuale)
+
+    def scegli_tip(self, header):
+        for nome, dati in Tips.tips.items():
+            if nome == header:
+                return dati
+            
 if __name__ == "__main__":
     app = BotApp()
     app.mainloop()
