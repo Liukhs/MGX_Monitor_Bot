@@ -1,0 +1,49 @@
+
+================================================================================
+REPORT MONITORAGGIO SITI - 26/03/26 09:16:45
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+MYGLADIX             | 200                  | 375ms      | 216.6 KB   | Apache          | NO              | 34         | SAMEORIGIN
+GRIFOCOM             | 200                  | 1607ms     | 154.4 KB   | Apache          | NO              | 328        | MANCANTE  
+GRIFOEU              | 200                  | 85ms       | 141.6 KB   | Apache          | NO              | 335        | MANCANTE  
+SMGROUP              | 200                  | 136ms      | 62.2 KB    | Apache          | NO              | 297        | SAMEORIGIN
+INTERACTIVEIT        | 200                  | 841ms      | 205.3 KB   | Apache          | NO              | 45         | MANCANTE  
+INTERACTIVEEU        | 200                  | 892ms      | 197.8 KB   | Apache          | NO              | 81         | MANCANTE  
+AGRIPASTA            | 200                  | 417ms      | 141.6 KB   | Apache          | NO              | 262        | MANCANTE  
+ARTIGIANA            | 200                  | 1805ms     | 398.7 KB   | Apache          | NO              | 29         | MANCANTE  
+BERGOLI              | 200                  | 809ms      | 156.1 KB   | Apache          | NO              | 203        | MANCANTE  
+CACIB                | 200                  | 760ms      | 369.8 KB   | cloudflare      | NO              | 60         | MANCANTE  
+DASTEL               | 200                  | 501ms      | 121.5 KB   | Apache          | NO              | 240        | MANCANTE  
+FERMARCHETTI         | 200                  | 270ms      | 79.4 KB    | Apache          | NO              | 76         | MANCANTE  
+MARIOFERRI           | 200                  | 306ms      | 186.8 KB   | Apache          | NO              | 29         | MANCANTE  
+RISEDOG              | 200                  | 757ms      | 110.8 KB   | Apache          | NO              | 40         | MANCANTE  
+VIDEOPRO             | 200                  | 2848ms     | 397.9 KB   | Apache          | NO              | 30         | MANCANTE  
+GOOGLE               | 200                  | 180ms      | 76.8 KB    | gws             | NO              | 53         | SAMEORIGIN
+-----------------------------------------------------------------------------------------------------------------------------------
+
+================================================================================
+REPORT MONITORAGGIO SITI - 26/03/26 12:13:02
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+MYGLADIX             | 200                  | 380ms      | 216.6 KB   | Apache          | NO              | 33         | SAMEORIGIN
+GRIFOCOM             | 200                  | 2058ms     | 154.6 KB   | Apache          | NO              | 328        | MANCANTE  
+GRIFOEU              | 200                  | 79ms       | 141.6 KB   | Apache          | NO              | 335        | MANCANTE  
+SMGROUP              | 200                  | 135ms      | 62.2 KB    | Apache          | NO              | 297        | SAMEORIGIN
+INTERACTIVEIT        | 200                  | 822ms      | 205.3 KB   | Apache          | NO              | 45         | MANCANTE  
+INTERACTIVEEU        | 200                  | 817ms      | 197.8 KB   | Apache          | NO              | 81         | MANCANTE  
+AGRIPASTA            | 200                  | 406ms      | 141.6 KB   | Apache          | NO              | 262        | MANCANTE  
+ARTIGIANA            | 200                  | 1676ms     | 398.7 KB   | Apache          | NO              | 29         | MANCANTE  
+BERGOLI              | 200                  | 1186ms     | 156.1 KB   | Apache          | NO              | 203        | MANCANTE  
+CACIB                | 200                  | 672ms      | 369.8 KB   | cloudflare      | NO              | 60         | MANCANTE  
+DASTEL               | 200                  | 495ms      | 121.5 KB   | Apache          | NO              | 240        | MANCANTE  
+FERMARCHETTI         | 200                  | 170ms      | 79.4 KB    | Apache          | NO              | 76         | MANCANTE  
+MARIOFERRI           | 200                  | 196ms      | 186.8 KB   | Apache          | NO              | 29         | MANCANTE  
+RISEDOG              | 200                  | 746ms      | 110.7 KB   | Apache          | NO              | 40         | MANCANTE  
+VIDEOPRO             | 200                  | 2836ms     | 397.9 KB   | Apache          | NO              | 30         | MANCANTE  
+GOOGLE               | 200                  | 149ms      | 76.8 KB    | gws             | NO              | 53         | SAMEORIGIN
+PROVA                | CONN_ERROR (DNS/OFF) | N/A        | N/A        | N/A             | N/A             | N/A        | N/A       
+-----------------------------------------------------------------------------------------------------------------------------------

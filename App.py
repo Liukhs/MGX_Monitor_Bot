@@ -7,6 +7,7 @@ import Logger
 import notifier
 import Checker
 import Tips
+import Styles
 
 class BotApp(ctk.CTk):
     def __init__(self):
@@ -14,39 +15,46 @@ class BotApp(ctk.CTk):
         self.report_attuale = []
         self.title("MyxMonitor - v1.0")
         self.geometry("1000x600")
+        
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1)
 
         # --- RIGA 0
-        self.header_frame = ctk.CTkFrame(self, fg_color="transparent")
-        self.header_frame.grid(row=0, column=0, sticky="ew", padx=20, pady=20)
+        self.header_frame = ctk.CTkFrame(self, **Styles.STYLE_HEADER)
+        self.header_frame.grid(row=0, column=0, sticky="ew", padx=0, pady=0)
         self.header_frame.grid_columnconfigure(0, weight=1)
-        self.label_nome = ctk.CTkLabel(self.header_frame, text="MYXMONITOR", font=("Segoe UI", 22, "bold"))
-        self.label_nome.grid(row=0, column=0, sticky="w")
+        self.label_nome = ctk.CTkLabel(self.header_frame, **Styles.STYLE_TITLE, text="MYXMONITOR")
+        self.label_nome.grid(row=0, column=0, sticky="w", padx=20, pady=10)
         
         
 
-        self.btn_avvia = ctk.CTkButton(self.header_frame, text="Esegui Operazione", fg_color="green", hover_color="darkgreen", command=self.avvio_sicuro)
-        self.btn_avvia.grid(row=0, column=1, sticky="e")
+        self.btn_avvia = ctk.CTkButton(self.header_frame, **Styles.STYLE_BTN_AVVIA, text="Esegui Operazione",  command=self.avvio_sicuro)
+        self.btn_avvia.grid(row=0, column=1, sticky="e", padx=20, pady=10)
         tip_btn_avvia = CTkToolTip(self.btn_avvia, "Avvia la scansione dei siti")
         
 
         # --- RIGA 1
         self.tools_frame = ctk.CTkFrame(self, fg_color="transparent")
-        self.tools_frame.grid(row=1, column=0, sticky="ew", padx=20, pady=(0, 10))
+        self.tools_frame.grid(row=1, column=0, sticky="ew", padx=20, pady=15)
 
-        self.btn_config = ctk.CTkButton(self.tools_frame, text="⚙️ Configurazione", width=150, command=self.apri_config)
+        self.btn_config = ctk.CTkButton(self.tools_frame, **Styles.STYLE_BTN_CONFIG, text="⚙️ Configurazione", command=self.apri_config)
         self.btn_config.grid(row=1, column=0, padx=(0, 10))
         tip_btn_config = CTkToolTip(self.btn_config, "Accedi alla configurazione dei siti")
-        self.btn_export = ctk.CTkButton(self.tools_frame, text="📄 Esporta Report TXT", width=150, command=self.verify_export)
+        self.btn_export = ctk.CTkButton(self.tools_frame, **Styles.STYLE_BTN_CONFIG, text="📄 Esporta Report TXT", command=self.verify_export)
         self.btn_export.grid(row=1, column=1, padx=(0, 10))
         tip_btn_export = CTkToolTip(self.btn_export, "Stampa i risultati in un file .txt")
         # --- RIGA 2
         self.area_log = ctk.CTkScrollableFrame(self,fg_color="#2b2b2b", border_width=2, corner_radius=0)
-        self.area_log.grid(row="2", column="0", sticky="nsew", padx=20, pady=(10, 20))
+        self.area_log.grid(row="2", column="0", sticky="nsew", padx=20, pady=(0, 15))
+        self.progress_bar = ctk.CTkProgressBar(self, orientation="horizontal", mode="determinate")
+        self.progress_bar.grid(row=3, column=0, padx=20, pady=(0, 10), sticky="ew")
+        self.progress_bar.set(0)
+        self.progress_bar.configure(progress_color=self.progress_bar.cget("fg_color"))
 
         self.headers = ["SITO", "STATO", "TEMPO", "PESO", "SERVER", "REDIRECT", "SSL", "SECURITY"]
+
+        Config.carica_configurazione()
 
         self.log("Sistema pronto. Inserisci i dati o avvia la scansione")
 
@@ -132,12 +140,14 @@ class BotApp(ctk.CTk):
             f.write(f'\n{nome}_URL = "{url}"')
             f.write(f'\n{nome}_KEY = "{key}"')
         self.aggiorna_lista_config()
-
     
     def log(self, messaggio):
         """Funzione per scrivere nell'area di testo dell'app"""
         label = ctk.CTkLabel(self.area_log, text=messaggio, font=("Consolas", 12), anchor="w", text_color="#ffffff")
         label.grid(sticky="ew", padx=10, pady=1)
+
+        self.area_log.update_idletasks()
+        self.area_log._parent_canvas.yview_moveto(1.0)
 
     def avvio_sicuro(self):
         self.btn_avvia.configure(state="disabled")
@@ -146,16 +156,29 @@ class BotApp(ctk.CTk):
     
     def funzione_bot(self):
         self.log(f"Inizio lavoro di monitoraggio")
-        
+        self.progress_bar.configure(progress_color="#1f538d")
+
+        Config.carica_configurazione()
         self.report_attuale = []
         errori_rilevati = []
-        self.log("avvio del bot, procedendo alla scansione...")
+        self.log("--- Avvio del bot, procedendo alla scansione...")
 
         self.log(f"--- Avvio monitoraggio delle ore {time.ctime()}")
 
+        totale_siti = len(Config.clienti)
+        if totale_siti == 0:
+            self.log("Nessun sito da controllare.")
+            self.btn_avvia.configure(state="normal")
+            return
+        self.progress_bar.set(0)
+        counter = 0
         for nome, dati in Config.clienti.items():
             stato = Checker.controlla_url(nome, dati, Config.TIMEOUT)
             self.report_attuale.append(stato)
+            counter += 1
+            progress_value = counter/totale_siti
+            self.progress_bar.set(progress_value)
+            self.log(f"Verificando il sito {nome} all'indirizzo: {dati['url']} - {time.ctime()}")
     
             if stato["stato"] != "200":
                 errori_rilevati.append(f"{nome}: {stato['stato']}")
@@ -164,29 +187,32 @@ class BotApp(ctk.CTk):
 
         
         try:
-            self.log("Scansione terminata. Generazione report...")
-
-    
-
             self.renderizza_tabella(self.report_attuale)
 
         except Exception as e:
             self.log(f"Errore nella scrittura del report: {e}")
         finally:
-    # Riabilita il bottone
+            # Riabilita il bottone
             self.btn_avvia.configure(state="normal", text="AVVIA SCANSIONE")
         if errori_rilevati:
             messaggio = "⚠️ *PROBLEMI RILEVATI!*\n\n" + "\n".join(errori_rilevati)
             notifier.invia_messaggio(messaggio)
             
-        self.log("Lavoro finito - controllare report_siti.txt")
+        self.log("Scansione terminata")
 
     def renderizza_tabella(self, risultati):
         # Pulisce tutto quello che c'è nel frame (log vecchi o tabelle vecchie)
         for widget in self.area_log.winfo_children():
             widget.destroy()
+        
+        self.area_log.grid_columnconfigure(0, weight=1)
+        self.area_log.grid_rowconfigure(0, weight=1)
 
         buffer_tabella = ctk.CTkFrame(self.area_log, fg_color="transparent")
+        buffer_tabella.grid(row=0, column=0, sticky="nsew")
+
+        for col in range(len(self.headers)):
+            buffer_tabella.grid_columnconfigure(col, weight=1)
         
         # Header (Intestazioni)
         for j, h in enumerate(self.headers):
@@ -212,10 +238,9 @@ class BotApp(ctk.CTk):
                 if j == 1 and str(valore) != "200": 
                     testo_colore = "#ff6666"
 
-                cella = ctk.CTkLabel(buffer_tabella, text=str(valore), fg_color=bg_color, 
-                                    text_color=testo_colore, padx=10, pady=2, font=("Segoe UI", 11))
+                cella = ctk.CTkLabel(buffer_tabella, **Styles.STYLE_BADGE_OK, text=str(valore) )
                 cella.grid(row=i, column=j, sticky="nsew", padx=1, pady=1)
-        buffer_tabella.pack(expand=True, fill="both")
+        buffer_tabella.grid(row=0, column=0, sticky="nsew")
         self.update_idletasks()
 
     def verify_export(self):
