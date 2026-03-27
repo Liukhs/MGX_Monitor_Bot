@@ -47,7 +47,9 @@ class BotApp(ctk.CTk):
         # --- RIGA 2
         self.area_log = ctk.CTkScrollableFrame(self,fg_color="#2b2b2b", border_width=2, corner_radius=0)
         self.area_log.grid(row="2", column="0", sticky="nsew", padx=20, pady=(0, 15))
-        self.progress_bar = ctk.CTkProgressBar(self, orientation="horizontal", mode="determinate")
+        self.frame_progress = ctk.CTkFrame(self, fg_color="white")
+        self.frame_progress.grid(row=3, column=0, padx=20, pady=(0,10), sticky="ew")
+        self.progress_bar = ctk.CTkProgressBar(self.frame_progress, orientation="horizontal", mode="determinate")
         self.progress_bar.grid(row=3, column=0, padx=20, pady=(0, 10), sticky="ew")
         self.progress_bar.set(0)
         self.progress_bar.configure(progress_color=self.progress_bar.cget("fg_color"))

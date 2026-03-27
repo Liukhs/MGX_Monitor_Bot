@@ -1,0 +1,23 @@
+
+================================================================================
+REPORT MONITORAGGIO SITI - 27/03/26 10:34:58
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------
+SITO                 | STATO                | TEMPO      | PESO       | SERVER          | REDIRECT        | SSL        | SECURITY  
+-----------------------------------------------------------------------------------------------------------------------------------
+MYGLADIX             | 200                  | 432ms      | 216.5 KB   | Apache          | NO              | 33         | SAMEORIGIN
+GRIFOCOM             | 200                  | 2758ms     | 154.4 KB   | Apache          | NO              | 327        | MANCANTE  
+GRIFOEU              | 200                  | 117ms      | 141.6 KB   | Apache          | NO              | 334        | MANCANTE  
+SMGROUP              | 200                  | 169ms      | 62.2 KB    | Apache          | NO              | 296        | SAMEORIGIN
+INTERACTIVEIT        | 200                  | 993ms      | 205.3 KB   | Apache          | NO              | 44         | MANCANTE  
+INTERACTIVEEU        | 200                  | 996ms      | 197.8 KB   | Apache          | NO              | 80         | MANCANTE  
+AGRIPASTA            | 200                  | 485ms      | 141.6 KB   | Apache          | NO              | 261        | MANCANTE  
+ARTIGIANA            | 200                  | 1799ms     | 398.7 KB   | Apache          | NO              | 28         | MANCANTE  
+BERGOLI              | 200                  | 1209ms     | 156.1 KB   | Apache          | NO              | 202        | MANCANTE  
+CACIB                | 200                  | 809ms      | 369.8 KB   | cloudflare      | NO              | 59         | MANCANTE  
+DASTEL               | 200                  | 549ms      | 121.5 KB   | Apache          | NO              | 239        | MANCANTE  
+FERMARCHETTI         | 200                  | 650ms      | 79.4 KB    | Apache          | NO              | 75         | MANCANTE  
+MARIOFERRI           | 200                  | 270ms      | 186.8 KB   | Apache          | NO              | 28         | MANCANTE  
+RISEDOG              | 200                  | 814ms      | 110.8 KB   | Apache          | NO              | 39         | MANCANTE  
+VIDEOPRO             | 200                  | 1755ms     | 397.9 KB   | Apache          | NO              | 29         | MANCANTE  
+-----------------------------------------------------------------------------------------------------------------------------------
