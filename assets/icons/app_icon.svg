@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Globo -->
+  <circle cx="28" cy="28" r="16" stroke="#2F80ED" stroke-width="3" fill="none"/>
+  
+  <!-- Linee globo -->
+  <ellipse cx="28" cy="28" rx="10" ry="16" stroke="#2F80ED" stroke-width="1.5" fill="none"/>
+  <line x1="12" y1="28" x2="44" y2="28" stroke="#2F80ED" stroke-width="1.5"/>
+
+  <!-- Lente -->
+  <circle cx="36" cy="36" r="10" stroke="#111" stroke-width="3" fill="none"/>
+  <line x1="43" y1="43" x2="52" y2="52" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Stato (verde = OK) -->
+  <circle cx="48" cy="16" r="6" fill="#27AE60"/>
+</svg>
