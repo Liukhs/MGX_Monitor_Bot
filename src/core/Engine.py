@@ -7,6 +7,7 @@ class WorkerSignals(QObject):
     progress_signal = Signal(float)
     status_signal = Signal(str, str)
     finished_signal = Signal(list)
+    segnale_risultato = Signal(dict)
 
 def funzione_bot(signals):
         signals.log_signal.emit("Inizio lavoro di monitoraggio...")
@@ -23,7 +24,9 @@ def funzione_bot(signals):
         for i, (nome, dati) in enumerate(Config.clienti.items(), 1):
             stato = Checker.controlla_url(nome, dati, Config.TIMEOUT)
             report_attuale.append(stato)
-            signals.log_signal.emit(f"Verifica {nome} -> {stato['stato']}")
+            signals.segnale_risultato.emit(stato)
+            signals.log_signal.emit(f"Sto controllando {nome} all'indirizzo {dati['url']}")
+            
             signals.progress_signal.emit(i / totale)
             if stato["stato"] != "200": errori.append(f"{nome}: {stato['stato']}")
         

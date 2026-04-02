@@ -1,105 +1,98 @@
 <div align="center">
-    <h1>🤖 Site Monitoring Bot</h1>
-    <p>Un bot python leggero e sicuro per monitorare i siti web dei clienti e ricevere notifiche istantanee su Telegram.</p>
+    <h1>🤖 MYXMONITOR</h1>
+    <p><b>Advanced Desktop Website Monitoring Tool</b></p>
+    <p>Una dashboard professionale in Python per il monitoraggio real-time di performance, sicurezza e integrità dei siti web.</p>
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-yellow.svg)
+![UI](https://img.shields.io/badge/UI-PySide6-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Build](https://img.shields.io/badge/status-active-success.svg)
 </div>
 
 ---
 
-## 🛠️ Requisiti Professionali
-* **Python 3.8+**
-* **Librerie:** `python-dotenv`, `requests`, `os`, `ssl`, `socket`, `datetime`
-* **Telegram:** Un bot creato tramite [@BotFather](https://t.me/botfather)
+## 🚀 Panoramica
+**MyxMonitor** è un'applicazione desktop (GUI) progettata per gestire il monitoraggio di una flotta di siti web da un'unica console centralizzata. Sviluppata in Python con PySide6, l'app fornisce un'analisi tecnica profonda che va oltre il semplice controllo "online/offline".
+
+### ⚡ Funzionalità Chiave
+* **Analisi Multi-Sito:** Scansione simultanea di tutti i domini configurati tramite multithreading per non bloccare l'interfaccia.
+* **Performance Check:** Monitoraggio di HTTP Status, TTFB (Time To First Byte) e Peso della pagina.
+* **Security Suite:** Controllo automatico della scadenza dei certificati **SSL** e verifica degli header di sicurezza (**X-Frame-Options**).
+* **Content Verification:** Ricerca di una "Keyword" specifica nella pagina per prevenire falsi positivi (es. pagine bianche con status 200).
+* **Console Log Real-time:** Interfaccia animata con log tecnici dettagliati e colorati durante la scansione.
+* **Reportistica Automatica:** Esportazione dei risultati e rotazione dei log giornalieri nella cartella `Logs/` (auto-cleaning dopo 7 giorni).
 
 ---
 
-## 🚀 Configurazione Rapida
+## 🛠️ Requisiti Tecnici
+L'applicazione richiede **Python 3.10+**. 
 
-### 1. Preparazione dell'ambiente
-Clona il progetto ed installa le dipendenze:
+### Librerie necessarie:
+* `PySide6` (Interfaccia Grafica)
+* `requests` (Gestione chiamate HTTP)
+* `python-dotenv` (Gestione configurazione .env)
+* Moduli standard: `ssl`, `socket`, `threading`, `datetime`, `os`
+
+---
+
+## 📦 Installazione e Setup
+
+### 1. Clonazione della Repository
+```bash
+git clone [https://github.com/tuo-username/MyxMonitor.git](https://github.com/tuo-username/MyxMonitor.git)
+cd MyxMonitor
+```
+
+### 2. Installazione Dipendenze
+Si consiglia l'uso di un ambiente virtuale:
+```bash
+python -m venv venv
+# Attivazione (Windows)
+venv\Scripts\activate
+# Installazione
+pip install PySide6 requests python-dotenv
+```
+
+### 3. Configurazione Dati (.env)
+Crea un file `.env` nella cartella principale del progetto:
+```env
+CLIENTE_A_URL=[https://sito-uno.it](https://sito-uno.it)
+CLIENTE_A_KEY=ParolaDaCercareNelCodice
+
+CLIENTE_B_URL=[https://sito-due.com](https://sito-due.com)
+CLIENTE_B_KEY=AltraParolaChiave
+```
+*Nota: La KEY serve a confermare che il sito stia servendo i contenuti corretti e non una pagina di errore generica.*
+
+---
+
+## 🖥️ Funzionamento
+Per avviare l'applicazione, eseguire il file principale:
 
 ```bash
-git clone [https://github.com/tuo-username/nome-repo.git](https://github.com/tuo-username/nome-repo.git)
-cd nome-repo
-pip install -r requirements.txt
+python Main.py
 ```
-### 2. Architettura di Configurazione
-Il progetto è strutturato per garantire la massima sicurezza, separando il codice dai dati sensibili dei clienti e delle chiavi API.
 
-#### 1. Il file .env
-Il Bot si basa sull'utilizzo di un file .env per contenere i suoi dati "segreti". Ovviamente **non caricato su GitHub**. Il file deve essere caricato nella cartella principale del progetto con questo formato:
-```env
-TELEGRAM_TOKEN=123456789:ABCDEF...
-CHAT_ID=987654321
-CLIENTE_A_URL=[https://sito-cliente-a.it](https://sito-cliente-a.it)
-CLIENTE_B_URL=[https://sito-cliente-b.com](https://sito-cliente-b.com)
-CLIENTE_A_KEY=CLIENTE_A
-CLIENTE_B_KEY=CLIENTE_B
-```
-#### 2. Il file Config.py
-Questo file viene utilizzato per leggere i dati dei clienti dal file .env sopraccitato e a renderli disponibili al bot in modo organizzato
-```python
-import os
-from dotenv import load_dotenv
-load_dotenv()
-clienti = {
-    "clienteA" : {"url": os.getenv("CLIENTE_A_URL"), "keyword": os.getenv("CLIENTE_A_KEY")},
-    "clienteB" : {"url": os.getenv("CLIENTE_B_URL"), "keyword": os.getenv("CLIENTE_B_KEY")}
-}
-```
-#### 3. Il file notifier.py
-Questo file viene utilizzato per la configurazione e l'invio dei messaggi tramite il bot di telegram precedentemente creato
-```python
-import requests
-import os
-from dotenv import load_dotenv 
-
-load_dotenv()
-
-TOKEN = os.getenv("TELEGRAM_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
-```
+### Workflow di scansione:
+1. **Inizializzazione:** All'avvio, l'app carica la configurazione dal file `.env`.
+2. **Esecuzione:** Cliccando su "Esegui Operazione", viene lanciato un Thread dedicato che interroga i server senza freezare la GUI.
+3. **Feedback UI:** La barra di progresso si aggiorna fluidamente tramite animazioni `QPropertyAnimation`, mentre la console stampa i dettagli tecnici di ogni sito (SSL days, Server type, Redirect).
+4. **Finalizzazione:** Al termine, i dati vengono aggregati in una tabella riassuntiva con badge colorati per una lettura immediata delle criticità.
 
 ---
-### 3. File da creare
-#### .env
-Come spiegato nella sezione precedente il file di configurazione e il file environment vanno creati per ogni nuovo bot.
-```env
-TELEGRAM_API = telegramAPI
-CHAT_ID = chatid
 
-CLIENTE_URL = urldelsitodelcliente
-CLIENTE_KEY = chiavecliente
-```
-Il parametro CLIENTE_KEY deve essere una parola da cercare all'interno della prima pagina che si apre del sito, viene utilizzato nel caso in cui alla richiesta HTTP la risposta sia 200 ma la pagina, per qualche problema, sia bianca
-#### Config.py
-Come spiegato in precedenza il file config dovrà contenere tutti gli url delle pagine da visitare assieme alla parola chiave da cercare nella pagina cercata
-```python
-import os
-from dotenv import load_dotenv
-load_dotenv()
-clienti = {
-    "cliente" : {"url": os.getenv("CLIENTE_URL"), "keyword": os.getenv("CLIENTE_KEY")}
-}
-```
----
-### 4. Funzionamento
-Il bot può essere lasciato in perenne esecuzione, lui è configurato per eseguire una scansione ogni due ore, con possibilità di aumentare, diminuire o togliere direttamente l'esecuzione automatica.
-All'interno del progetto è presente la cartella Logs, cartella che conterrà i report completi scritti dal bot dopo ogni esecuzione.
-I file dei report vengono divisi in base al giorno(uno al giorno) e quelli più vecchi di 7 giorni vengono cancellati automaticamente.
-Il bot verifica il funzionamento del sito, il ttfb(Time To First Bite), il peso della pagina, la tipologia di server, se sono presenti redirect, quanti giorni prima della scadenza del certificato SSL e l'header security.
-La notifica su telegram viene inviata solo se un sito non è più online o se al certificato SSL mancano <10 giorni alla scadenza. 
+## 📂 Struttura del Progetto
+| Percorso | Scopo |
+| :--- | :--- |
+| `Main.py` | Entry point e inizializzazione App |
+| `src/core/Engine.py` | Gestione segnali (Signals) e logica thread |
+| `src/core/Checker.py` | Analisi tecnica degli URL (SSL, Header, HTTP) |
+| `src/gui/Main_window.py` | Gestione layout, console e tabella risultati |
+| `src/gui/Styles.py` | Definizione dello stile grafico (QSS) |
+| `Logs/` | Output dei report giornalieri in formato TXT |
 
 ---
-### 5. Struttura File
-| File | Scopo | Visibilità |
-| :---: | :---: | :---: |
-| Main.py | Logica principale e ciclo di controllo | ✅ Pubblico |
-| Config.py | Gestione e mappatura dei clienti | ✅ Pubblico |
-| Notifier.py | Modulo invio notifiche telegram | ✅ Pubblico |
-| Logger.py | Scrittura dei report del bot | ✅ Pubblico |
-| .env | Token e URL privati | ❌ PRIVATO |
-| Checker.py | Effettivo controllo delle pagine | ✅ Pubblico |
+
+<div align="center">
+    <sub>Sviluppato per il monitoraggio professionale di infrastrutture web.</sub>
+</div>

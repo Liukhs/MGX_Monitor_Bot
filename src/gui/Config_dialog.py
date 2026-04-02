@@ -8,21 +8,34 @@ class ConfigDialog(QDialog):
     """Finestra Toplevel per la configurazione dei siti"""
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Configurazione siti")
-        self.resize(800, 600)
-        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.setStyleSheet("background-color: #ffffff; color: black;")
         
-        layout = QVBoxLayout(self)
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(20, 20, 20, 20)
+
+        header_layout = QHBoxLayout()
+        self.btn_back = QPushButton("⬅ Torna indietro")
+        self.btn_back.setStyleSheet("padding: 8px; font-weight: bold;")
+
+        lbl_titolo = QLabel("CONFIGURAZIONE SISTEMA")
+        lbl_titolo.setStyleSheet("font-size: 18px; font-weight: bold; color: #333;")
+
+        header_layout.addWidget(self.btn_back)
+        header_layout.addStretch()
+        header_layout.addWidget(lbl_titolo)
+        main_layout.addLayout(header_layout)
+
         
         # Area lista (Scrollable)
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
+        self.scroll.setFrameShape(QFrame.NoFrame)
         self.scroll_content = QWidget()
         self.lista_layout = QVBoxLayout(self.scroll_content)
         self.lista_layout.setAlignment(Qt.AlignTop)
         self.scroll.setWidget(self.scroll_content)
-        layout.addWidget(self.scroll)
+        main_layout.addWidget(self.scroll)
+        
         
         # Frame Aggiungi
         add_frame = QFrame()
@@ -37,7 +50,7 @@ class ConfigDialog(QDialog):
             add_layout.addWidget(w)
             w.setStyleSheet("background: #333; border: 1px solid #555; padding: 5px;")
             
-        layout.addWidget(add_frame)
+        main_layout.addWidget(add_frame)
         self.aggiorna_lista_config()
 
     def aggiorna_lista_config(self):

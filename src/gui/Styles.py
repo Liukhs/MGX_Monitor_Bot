@@ -112,11 +112,12 @@ QPushButton:hover{{
     font-size: 11px;
 }}
 QProgressBar{{
-    background-color: #2b2b2b;
+    background-color: #c7c7c5;
     border-radius: 4px;
 }}
 QProgressBar::chunk{{
-    background-color: #1f538d;
+    background-color: green;
+    border-radius: 4px;
 }}
 QHeaderView::section{{
     background-color: #f8fafC;
@@ -146,5 +147,16 @@ QTableWidget::item {{
     border-bottom: 1px solid #f1f5f9;
     padding: 10px;
     color: #1e293b;
+}}
+#ProgressLayout{{ 
+    border-radius: {BORDER_RADIUS_MID};
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    margin: 10px;
+}}
+#ProgressLayout QLabel{{  
+    color: #000000;
+    font-weight: bold;
+    font-size: 12px;
 }}
 """
