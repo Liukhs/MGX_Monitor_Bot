@@ -133,6 +133,21 @@ QTableWidget {{
     gridline-color: transparent;
     font-family: 'Segoe UI', sans-serif;
 }}
+QTableWidget::item:hover{{ 
+    background-color: #f0f0f0;
+    color: #000000;
+ }}
+ QTableWidget::item:selected{{ 
+    background-color: #0078d7;
+    color: #ffffff;
+    outline: none;
+ }}
+ QTableWidget::item{{ 
+    outline: none;
+  }}
+  QTableWidget::item:focus{{ 
+    outline: none;
+  }}
 QHeaderView::section {{
     background-color: #f8fafc;
     padding: 10px;

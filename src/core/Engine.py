@@ -32,5 +32,5 @@ def funzione_bot(signals):
         
         signals.finished_signal.emit(report_attuale)
         signals.status_signal.emit("● SCANSIONE COMPLETATA", "#2ecc71")
-        if errori: notifier.invia_messaggio("⚠️ Errori rilevati!")
+        if errori: print("Errori rilevati")
         
