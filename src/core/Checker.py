@@ -1,6 +1,7 @@
 import requests
 import ssl
 import socket
+import src.core.Bad_keywords as Bad_keywords
 from datetime import datetime
 
 def controlla_scadenza_ssl(hostname):
@@ -30,6 +31,20 @@ def controlla_url(nome, dati, timeout):
         giorni_ssl = controlla_scadenza_ssl(hostname)
         peso_kb = len(r.content)/1024
         server = r.headers.get('Server', 'Sconosciuto')
+
+        for parola in Bad_keywords.BAD_KEYWORDS:
+            if parola in r:
+                return{
+                    "nome": nome,
+                    "stato": f"KEYWORD MATCH - {parola}",
+                    "tempo" : f"{ms:.0f}ms",
+                    "peso"  : f"{peso_kb:.1f} KB",
+                    "server" : server[:15],
+                    "redirect" : redirect,
+                    "ssl_days" : giorni_ssl,
+                    "security" : security_header
+                }
+        
 
         if r.status_code == 200:
             if keyword.lower() in r.text.lower():

@@ -1,4 +1,5 @@
 import os
+import src.core.Config as Config
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QScrollArea, 
                                QWidget, QFrame, QLineEdit, QPushButton, QLabel, 
                                QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
@@ -33,19 +34,28 @@ class ConfigDialog(QDialog):
         rescan_layout = QVBoxLayout()
         timeout_lbl = QLabel("TimeOut")
         rescan_lbl = QLabel("Temporized Scan")
+        rescan_lbl.setToolTip("Imposta la riscansione temporizzata dei siti")
         self.timeout_entry = QLineEdit()
         timeout_btn = QPushButton("SALVA")
-        rescan_entry = QLineEdit()
-        rescan_btn = QPushButton("SALVA")
-        rescan_toggle = QCheckBox()
+        self.rescan_entry = QLineEdit()
+        self.rescan_btn = QPushButton("SALVA")
+        self.rescan_toggle = QCheckBox()
         config_options.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.rescan_btn.clicked.connect(self.imposta_temporized)
 
         self.timeout_entry.setFixedWidth(50)
-        rescan_entry.setFixedWidth(50)
+        self.rescan_entry.setFixedWidth(50)
         timeout_btn.setFixedWidth(80)
-        rescan_btn.setFixedWidth(80)
-        rescan_entry.setEnabled(False)
-        rescan_btn.setEnabled(False)
+        self.rescan_btn.setFixedWidth(80)
+        timeout_btn.setFixedHeight(25)
+        self.rescan_btn.setFixedHeight(25)
+        self.timeout_entry.setFixedHeight(25)
+        self.rescan_btn.setStyleSheet("font-size: 8px; padding: 2px 5px;")
+        timeout_btn.setStyleSheet("font-size: 8px; padding: 2px 5px;")
+        self.rescan_entry.setFixedHeight(25)
+        self.rescan_entry.setEnabled(False)
+        self.rescan_btn.setEnabled(False)
+        self.rescan_entry.setToolTip("Ogni quanti MINUTI deve riscansionare")
         self.riempi_da_env(self.timeout_entry)
         timeout_btn.clicked.connect(self.cambia_timeout)
         timeout_layout.addWidget(timeout_lbl)
@@ -59,13 +69,14 @@ class ConfigDialog(QDialog):
         rescan_btn_entry = QHBoxLayout()
         rescan_title_check = QHBoxLayout()
         rescan_title_check.addWidget(rescan_lbl)
-        rescan_title_check.addWidget(rescan_toggle)
+        rescan_title_check.addWidget(self.rescan_toggle)
         rescan_layout.addLayout(rescan_title_check)
-        rescan_btn_entry.addWidget(rescan_entry)
-        rescan_btn_entry.addWidget(rescan_btn)
+        rescan_btn_entry.addWidget(self.rescan_entry)
+        rescan_btn_entry.addWidget(self.rescan_btn)
         rescan_layout.addLayout(rescan_btn_entry)
         rescan_title_check.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
        
+
         config_options.addLayout(rescan_layout)
         config_options.setAlignment(timeout_layout, Qt.AlignTop)
         config_options.setAlignment(rescan_layout, Qt.AlignTop)
@@ -73,6 +84,8 @@ class ConfigDialog(QDialog):
         timeout_lbl.setStyleSheet("font-size: 14px; font-weight: bold; color: #333;")
         rescan_lbl.setStyleSheet("font-size: 14px; font-weight: bold; color: #333;")
         
+        self.rescan_toggle.toggled.connect(self.attiva_options)
+        self.attiva_options(self.rescan_toggle.isChecked())
 
 
         
@@ -175,6 +188,15 @@ class ConfigDialog(QDialog):
         timeout = self.timeout_entry.text().strip()
         set_key(".env", "TIMEOUT", timeout)
         os.environ["TIMEOUT"] = timeout
+
+    def attiva_options(self, attivo):
+        self.rescan_entry.setEnabled(attivo)
+        self.rescan_btn.setEnabled(attivo)
+    
+    def imposta_temporized(self):
+        Config.is_temporized = True
+        Config.timer_intervallo = self.rescan_entry.text().strip() 
+        print(Config.timer_intervallo)
 
                 
 
