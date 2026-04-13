@@ -1,11 +1,11 @@
 <?php
-$secret_key = '$2b$12$Uxhp07rn8gcbay2ncjffgOAv7BrAw55lQcCQw.LTSNHHvcByEui3W'; //da cambiare per ogni cliente
+$bot_key = $_GET['key'] ?? '';
+$secret_key = '$2b$12$Uxhp07rn8gcbay2ncjffgOAv7BrAw55lQcCQw.LTSNHHvcByEui3W'; 
 
-if(!isset($_GET['key']) || $_GET['key'] !== $secret_key){
+if(!password_verify($bot_key, $secret_key)){
     header('HTTP/1.1 403 Forbidden');
     exit('Access Denied');
 }
-
 
 $report = [
     "status" => "OK",

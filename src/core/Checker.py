@@ -1,6 +1,7 @@
 import requests
 import ssl
 import socket
+import os
 import src.core.Bad_keywords as Bad_keywords
 from datetime import datetime
 
@@ -98,3 +99,29 @@ def controlla_url(nome, dati, timeout):
             "security" : "N/A"
         }
     
+def check_server_health(nome): 
+    prefisso = nome.strip().upper()
+    env_name = f"{prefisso}_SECRET"
+    url_name = f"{prefisso}_URL"
+    key = os.getenv(env_name)
+    url = os.getenv(url_name)
+    api_url = f"{url}/MgxMonitor_API.php"
+
+    if not key:
+        return {"Error": "Chiave ENV mancante"}
+    
+    try:
+        response = requests.get(f"{api_url}?key={key}", timeout=10)
+        
+
+        if response.status_code == 200:
+            data = response.json()
+            
+            return data
+        elif response.status_code == 403:
+            return{"Error": "Accesso negato(Chiave errata)"}
+        else:
+            return {"Error": f"Errore server {response.status_code}"}
+        
+    except Exception as e:
+        return {"Error": f"Connessione fallita: {str(e)}"}

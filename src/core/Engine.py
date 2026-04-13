@@ -27,9 +27,11 @@ def funzione_bot(signals):
 
             for i, (nome, dati) in enumerate(Config.clienti.items(), 1):
                 stato = Checker.controlla_url(nome, dati, Config.TIMEOUT)
+                server_health = Checker.check_server_health(nome)
+                stato['server_health'] = server_health
                 report_attuale.append(stato)
-                signals.segnale_risultato.emit(stato)
                 signals.log_signal.emit(f"Sto controllando {nome} all'indirizzo {dati['url']}")
+                signals.segnale_risultato.emit(stato)
                 
                 signals.progress_signal.emit(i / totale)
                 if stato["stato"] != "200": errori.append(f"{nome}: {stato['stato']}")

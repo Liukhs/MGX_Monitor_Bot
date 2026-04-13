@@ -3,7 +3,7 @@ import threading
 from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                                QPushButton, QLabel, QFrame, QScrollArea, 
                                QProgressBar, QTableWidget, QTableWidgetItem, QHeaderView, QStackedWidget)
-from PySide6.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve
+from PySide6.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve, QEvent
 from PySide6.QtGui import QPixmap, QGuiApplication
 
 # I TUOI MODULI
@@ -14,6 +14,7 @@ import src.core.Config as Config
 import src.core.Logger as Logger
 import assets_rc
 from .Config_dialog import ConfigDialog
+from .Server_details import ServerDetails
 
 class BotApp(QMainWindow):
     def __init__(self):
@@ -239,7 +240,8 @@ class BotApp(QMainWindow):
 
             # --- COLONNA 4: SERVER (Badge Azzurro) ---
             srv = r.get('server', 'N/D')
-            badge_srv = self.crea_badge(srv.upper(), "#dbeafe", "#1e40af")
+            badge_srv = self.crea_badge(srv.upper(), "#dbeafe", "#1e40af", nome_item)
+            
             tab.setCellWidget(i, 4, badge_srv)
 
             # --- COLONNA 5: REDIRECT ---
@@ -266,7 +268,7 @@ class BotApp(QMainWindow):
         if not self.report_attuale: return
         Logger.scrivi_report(self.report_attuale)
 
-    def crea_badge(self, testo, colore_bg, colore_testo):
+    def crea_badge(self, testo, colore_bg, colore_testo, nome_sito=None):
         lbl = QLabel(testo)
         lbl.setAlignment(Qt.AlignCenter)
         # Il segreto è il border-radius per fare la pillola
@@ -282,7 +284,13 @@ class BotApp(QMainWindow):
         lay = QHBoxLayout(container)
         lay.addWidget(lbl)
         lay.setContentsMargins(0,0,0,0)
+
+        if nome_sito:
+            container.setObjectName(nome_sito.text())
+            container.installEventFilter(self)
+            container.setCursor(Qt.PointingHandCursor)
         return container
+    
     def scrivi_log_sito(self, dati_risultato):
             C_BIANCO = "#ffffff"
             C_VERDE = "#2ECC71"
@@ -332,3 +340,17 @@ class BotApp(QMainWindow):
         label = QLabel(messaggio_html)
         label.setStyleSheet("font-family: 'Consolas', 'Courier New'; font-size: 13px; margin-left: 15px;")
         self.console_layout.insertWidget(self.console_layout.count(), label)
+
+    def mostra_dettagli(self, data):
+        dialog = ServerDetails(data, self)
+        dialog.exec()
+
+    def eventFilter(self, watched, event):
+        if event.type() == QEvent.MouseButtonPress:
+            nome_sito = watched.objectName()
+            if nome_sito:
+                for r in self.report_attuale:
+                    if r.get('nome') == nome_sito:
+                        self.mostra_dettagli(r)
+                        return True
+        return super().eventFilter(watched, event)
