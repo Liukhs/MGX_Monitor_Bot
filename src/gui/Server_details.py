@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar
+from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar, QHBoxLayout, QFrame
+from PySide6.QtCore import Qt
 
 class ServerDetails(QDialog):
     def __init__(self, data, parent=None):
@@ -21,7 +22,29 @@ class ServerDetails(QDialog):
                     elif key == 'php_version':
                         layout.addWidget(QLabel(f"PHP Version: {value}"))
                     elif key == 'disk_total':
+                        GB = 1024 ** 3
                         self.bar = QProgressBar()
+                        disk_layout = QHBoxLayout()
+                        card_libero = QFrame()
+                        card_libero.setFixedSize(160, 160)
+                        card_libero.setStyleSheet("background-color: #333; border-radius: 15px;")
+                        lay_libero = QVBoxLayout(card_libero)
+                        lay_libero.setAlignment(Qt.AlignCenter)
+                        lbl_titolo = QLabel("LIBERO")
+                        lbl_titolo.setStyleSheet("color: #94a3b8; font-size: 10px; font-weight: bold;")
+                        lbl_valore = QLabel(f"{round(server_health.get('disk_free')/GB)}GB")
+                        lbl_valore.setAlignment(Qt.AlignCenter)
+                        lbl_valore.setStyleSheet("color: white; font-size: 20px; font-weight: bold;")
+                        lay_libero.addWidget(lbl_titolo)
+                        lay_libero.addWidget(lbl_valore)
+                        disk_layout.addWidget(card_libero)
+                        card_cerchio = QFrame()
+                        card_cerchio.setFixedSize(160, 160)
+                        card_cerchio.setStyleSheet("background-color: #333; border-radius: 15px;")
+                        lay_cerchio = QVBoxLayout(card_cerchio)
+                        lay_cerchio.setAlignment(Qt.AlignCenter)
+                        disk_layout.addWidget(card_cerchio)
+                        layout.addLayout(disk_layout)
                         percent = int (server_health.get('disk_free') / server_health.get('disk_total') * 100)
                         if percent > 50 :
                             self.bar.setStyleSheet(f"""
@@ -78,7 +101,7 @@ class ServerDetails(QDialog):
                             }}
                         """)
                         
-                        GB = 1024 ** 3
+                        
                         
                         self.bar.setValue(percent)
                         layout.addWidget(QLabel(f"Spazio libero: {round(server_health.get('disk_free')/GB)}GB"))
