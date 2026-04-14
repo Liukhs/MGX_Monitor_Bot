@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar, QHBoxLayout, QFrame
+from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar, QHBoxLayout, QFrame, QWidget
 from PySide6.QtCore import Qt
 import src.gui.Circular_progress as RoundBar
 
@@ -11,7 +11,19 @@ class ServerDetails(QDialog):
         layout = QVBoxLayout(self)
 
         round_bar = RoundBar.CircularProgress()
-
+        tech_frame = QFrame()
+        tech_frame.setStyleSheet("""
+            QFrame {
+                background-color: #333; 
+                border-radius: 10px; 
+                padding: 10px;
+            }
+            QLabel { 
+                background: transparent; 
+                font-family: 'Segoe UI';
+            }
+        """)
+        tech_layout = QVBoxLayout(tech_frame)
         layout.addWidget(QLabel("Dettagli Server Health:"))
 
         server_health = data.get('server_health', {})
@@ -21,9 +33,35 @@ class ServerDetails(QDialog):
             else:
                 for key, value in server_health.items():
                     if key == 'db_status':
-                        layout.addWidget(QLabel(f"DB Status: {value}"))
+                        db_row = QWidget()
+                        row_lay = QHBoxLayout(db_row)
+                        row_lay.setContentsMargins(10, 5, 10, 5)
+                        db_row.setStyleSheet("border-radius: 10px;")
+                        db_val = server_health.get('db_status', 'not checked')#Il DB ancora non viene interrogato per questo sarà sempre not checked
+                        db_color = "#22c55e" if "OK" in db_val else "#eab308"
+                        db_lbl = QLabel("DATABASE:")
+                        lbl_value = QLabel(f"{db_val}")
+                        db_lbl.setStyleSheet("color: #94a3b8; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        lbl_value.setStyleSheet(f"color: {db_color}; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        row_lay.addWidget(db_lbl)
+                        row_lay.addStretch()
+                        row_lay.addWidget(lbl_value)
+                        tech_layout.addWidget(db_row)
                     elif key == 'php_version':
-                        layout.addWidget(QLabel(f"PHP Version: {value}"))
+                        php_row = QWidget()
+                        row_layout = QHBoxLayout(php_row)
+                        row_layout.setContentsMargins(10,5,10,5)
+                        php_row.setStyleSheet("border-radius: 10px;")
+
+                        php_val = server_health.get('php_version', 'N/D')
+                        php_lbl = QLabel("PHP VERSION:")
+                        lbl_version = QLabel(f"{php_val}")
+                        php_lbl.setStyleSheet("color: #94a3b8; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        lbl_version.setStyleSheet("color: #94a3b8; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        row_layout.addWidget(php_lbl)
+                        row_layout.addStretch()
+                        row_layout.addWidget(lbl_version)
+                        tech_layout.addWidget(php_row)
                     elif key == 'disk_total':
                         GB = 1024 ** 3
                         self.bar = QProgressBar()
@@ -55,10 +93,24 @@ class ServerDetails(QDialog):
                         round_bar.set_value(percent)
                         disk_layout.addWidget(card_cerchio)
                         layout.addLayout(disk_layout)
-                        layout.addWidget(QLabel(f"Status: {server_health.get('status')}"))
+                        status_row = QWidget()
+                        status_layout = QHBoxLayout(status_row)
+                        status_layout.setContentsMargins(10,5,10,5)
+                        status_row.setStyleSheet("border-radius: 10px;")
+                        
+                        status_val = server_health.get('status')
+                        status_lbl = QLabel("STATUS:")
+                        lbl_val = QLabel(f"{status_val}")
+                        status_color =  "#22c55e" if "OK" in status_val else "#eab308"
+                        status_lbl.setStyleSheet("color: #94a3b8; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        lbl_val.setStyleSheet(f"color: {status_color}; font-size: 12px; margin-top: 5px; padding: 5px 2px 5px 2px;")
+                        status_layout.addWidget(status_lbl)
+                        status_layout.addStretch()
+                        status_layout.addWidget(lbl_val)
+                        tech_layout.addWidget(status_row)
 
 
         else:
             layout.addWidget(QLabel(str(server_health)))
-
+        layout.addWidget(tech_frame)
         self.setStyleSheet("background-color: #2b2b2b; color: white;")

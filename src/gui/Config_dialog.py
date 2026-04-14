@@ -100,7 +100,7 @@ class ConfigDialog(QDialog):
         #main_layout.addWidget(self.scroll)
         self.tab = QTableWidget()
         self.tab.setColumnCount(3)
-        self.tab.setHorizontalHeaderLabels(["CLIENTE", "URL", "KEYWORD"])
+        self.tab.setHorizontalHeaderLabels(["CLIENTE", "URL", "KEYWORD", "ATTIVO"])
         header = self.tab.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
         header.setDefaultAlignment(Qt.AlignLeft | Qt.AlignVCenter)
@@ -153,10 +153,13 @@ class ConfigDialog(QDialog):
 
                 self.tab.insertRow(row_index)
                 
+                check_box = QCheckBox()
+                check_box.stateChanged.connect(lambda state, r=row_index: self.toggle_sito(r))
                 
                 self.tab.setItem(row_index, 0, QTableWidgetItem(nome_base))
                 self.tab.setItem(row_index, 1, QTableWidgetItem(url))
                 self.tab.setItem(row_index, 2, QTableWidgetItem(keyword))
+                self.tab.setCellWidget(row_index, 3, QCheckBox())
 
                 row_index += 1
         
@@ -198,6 +201,9 @@ class ConfigDialog(QDialog):
         Config.timer_intervallo = self.rescan_entry.text().strip() 
         print(Config.timer_intervallo)
 
+    def toggle_sito(self, row_index):
+        item = self.tab(row_index, 0)
+        
                 
 
 class HoverDelegate(QStyledItemDelegate):
