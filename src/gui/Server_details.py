@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QProgressBar, QHBoxLayout, QFrame
 from PySide6.QtCore import Qt
+import src.gui.Circular_progress as RoundBar
 
 class ServerDetails(QDialog):
     def __init__(self, data, parent=None):
@@ -8,6 +9,8 @@ class ServerDetails(QDialog):
         self.setMinimumWidth(400)
 
         layout = QVBoxLayout(self)
+
+        round_bar = RoundBar.CircularProgress()
 
         layout.addWidget(QLabel("Dettagli Server Health:"))
 
@@ -43,70 +46,15 @@ class ServerDetails(QDialog):
                         card_cerchio.setStyleSheet("background-color: #333; border-radius: 15px;")
                         lay_cerchio = QVBoxLayout(card_cerchio)
                         lay_cerchio.setAlignment(Qt.AlignCenter)
+                        lay_cerchio.addWidget(round_bar)
+                        free = float(server_health.get('disk_free', 0))
+                        total = float(server_health.get('disk_total', 1))
+                        print(f"{server_health.get('disk_free')} spazio libero in byte")
+                        print(f"{server_health.get('disk_total')} spazio totale in byte")
+                        percent = int ((free/total) * 100)
+                        round_bar.set_value(percent)
                         disk_layout.addWidget(card_cerchio)
                         layout.addLayout(disk_layout)
-                        percent = int (server_health.get('disk_free') / server_health.get('disk_total') * 100)
-                        if percent > 50 :
-                            self.bar.setStyleSheet(f"""
-                            QProgressBar {{
-                                border: 2px solid #444;       /* Bordo esterno */
-                                border-radius: 8px;           /* Arrotondamento contenitore */
-                                background-color: #1e1e1e;    /* Colore dello SFONDO della barra */
-                                text-align: center;           /* Posizione del testo % */
-                                color: white;                 /* Colore del testo % */
-                                font-weight: bold;
-                                height: 20px;
-                            }}
-
-                            QProgressBar::chunk {{  
-                                background-color: #22c55e; /* Colore della BARRA effettiva */
-                                border-radius: 6px;              /* Arrotondamento barra interna */
-                                margin: 2px;                     /* Piccolo stacco dai bordi */
-                            }}
-                        """)
-                        elif percent > 20:
-                            self.bar.setStyleSheet(f"""
-                            QProgressBar {{
-                                border: 2px solid #444;       /* Bordo esterno */
-                                border-radius: 8px;           /* Arrotondamento contenitore */
-                                background-color: #1e1e1e;    /* Colore dello SFONDO della barra */
-                                text-align: center;           /* Posizione del testo % */
-                                color: white;                 /* Colore del testo % */
-                                font-weight: bold;
-                                height: 20px;
-                            }}
-
-                            QProgressBar::chunk {{  
-                                background-color: #eab308; /* Colore della BARRA effettiva */
-                                border-radius: 6px;              /* Arrotondamento barra interna */
-                                margin: 2px;                     /* Piccolo stacco dai bordi */
-                            }}
-                        """)
-                        else:
-                            self.bar.setStyleSheet(f"""
-                            QProgressBar {{
-                                border: 2px solid #444;       /* Bordo esterno */
-                                border-radius: 8px;           /* Arrotondamento contenitore */
-                                background-color: #1e1e1e;    /* Colore dello SFONDO della barra */
-                                text-align: center;           /* Posizione del testo % */
-                                color: white;                 /* Colore del testo % */
-                                font-weight: bold;
-                                height: 20px;
-                            }}
-
-                            QProgressBar::chunk {{  
-                                background-color: #ef4444; /* Colore della BARRA effettiva */
-                                border-radius: 6px;              /* Arrotondamento barra interna */
-                                margin: 2px;                     /* Piccolo stacco dai bordi */
-                            }}
-                        """)
-                        
-                        
-                        
-                        self.bar.setValue(percent)
-                        layout.addWidget(QLabel(f"Spazio libero: {round(server_health.get('disk_free')/GB)}GB"))
-                        layout.addWidget(self.bar)
-                        layout.addWidget(QLabel(f"Spazio totale: {round(server_health.get('disk_total')/GB)}GB"))
                         layout.addWidget(QLabel(f"Status: {server_health.get('status')}"))
 
 
